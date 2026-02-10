@@ -147,7 +147,7 @@ function focusPlusContext(data) {
     .attr("transform", "translate(0," + height + ")")
     .call(xAxis);
     focus.append("g")
-    attr("class", "axis axis--y")
+    .attr("class", "axis axis--y")
     .call(yAxis);
 
     //Add y axis label to the scatter plot
@@ -171,7 +171,7 @@ function focusPlusContext(data) {
         .data(data.features)
         .enter().append("circle")
         .attr("class", "dot")
-        .call(selected_dots.plot)
+       
         .filter(function (d) { return d.properties.EQ_PRIMARY != null })
         .attr("cx", function (d) {
             return xScale(parseDate(d.properties.Date));
@@ -184,7 +184,7 @@ function focusPlusContext(data) {
      * Task 12 - Call plot function
      * plot(points,nr,nr) no need to send any integers!
      */
-
+    points_plot.plot(selected_dots);
     //<---------------------------------------------------------------------------------------------------->
 
     //Mouseover function
@@ -200,15 +200,17 @@ function focusPlusContext(data) {
             /**
              * Task 13 - Update information in the "tooltip" by calling the tooltip function.
              */
-
+            points.tooltip(d);
 
             //Rescale the dots onhover
             d3.select(this).attr('r', 15)
 
             //Rescale the dots on the map.
-            curent_id = d3.select(this)._groups[0][0].__data__.id.toString()
+            current_id = d3.select(this)._groups[0][0].__data__.id.toString()
             d3.selectAll(".mapcircle")
-                .filter(function (d) { return d.id === curent_id; })
+                .filter(function (d) { return d.id === current_id; })
+                .transition() // Extra added for smooth transition
+                .duration(300)
                 .attr('r', 15)
 
             //Call map hover function if implemented!
@@ -235,7 +237,7 @@ function focusPlusContext(data) {
 
                 //Reset all the dots on the map
                 d3.selectAll(".mapcircle")
-                    .filter(function (d) { return d.id === curent_id; })
+                    .filter(function (d) { return d.id === current_id; })
                     .transition()
                     .duration(500)
                     .attr("r", function (d) {
@@ -292,7 +294,7 @@ function focusPlusContext(data) {
             /**
              * Remove comment for updating dots on the map.
              */
-            //curr_points_view = world_map.change_map_points(curr_view_erth)
+            curr_points_view = world_map.change_map_points(curr_view_erth)
         }
     }
 

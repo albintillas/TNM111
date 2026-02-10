@@ -52,3 +52,7 @@
     font-size: 14px;
     line-height: 30px;
 }
+#map { 
+    height: 180px; 
+    width: 900px;
+}
