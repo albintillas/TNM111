@@ -47,6 +47,8 @@ function focusPlusContext(data) {
      * Task 1 - Parse date with timeParse to year-month-day
      */
 
+    
+
     /**
      * Task 2 - Define scales and axes for scatterplot
      */
