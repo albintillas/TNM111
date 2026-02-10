@@ -171,6 +171,7 @@ function focusPlusContext(data) {
         .data(data.features)
         .enter().append("circle")
         .attr("class", "dot")
+        .call(selected_dots.plot)
         .filter(function (d) { return d.properties.EQ_PRIMARY != null })
         .attr("cx", function (d) {
             return xScale(parseDate(d.properties.Date));
