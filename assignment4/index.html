@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Star Wars Character Network Comparison</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <button id="mute-btn" class="mute-btn" type="button" aria-pressed="false">🔊 Mute</button>
+  <audio id="bg-music" src="starwarssong.mp3" autoplay loop></audio>
+
+  <header class="app-header">
+    <h1>Star Wars Character Network Comparison</h1>
+    <p>Explore and compare character interactions across episodes.</p>
+  </header>
+
+  <main class="app-main">
+    <section class="control-panel" aria-label="Controls">
+      <div class="control-group search-group">
+        <label for="character-search">Character search</label>
+        <div class="search-row">
+          <div class="search-input-wrap">
+            <input id="character-search" type="text" placeholder="Type a character name..." autocomplete="off" />
+            <ul id="search-suggestions" class="suggestions" role="listbox" aria-label="Character suggestions"></ul>
+          </div>
+          <button id="search-btn" type="button">Highlight</button>
+          <button id="clear-btn" type="button">Clear</button>
+        </div>
+      </div>
+
+      <div class="control-group">
+        <label for="min-edge-weight">Minimum edge weight: <span id="min-edge-weight-value">0</span></label>
+        <input id="min-edge-weight" type="range" min="0" max="20" step="1" value="0" />
+      </div>
+
+      <div class="control-group">
+        <label for="min-node-value">Minimum node value: <span id="min-node-value-value">0</span></label>
+        <input id="min-node-value" type="range" min="0" max="50" step="1" value="0" />
+      </div>
+
+      <div class="control-group checkbox-group">
+        <label>
+          <input id="show-isolated-nodes" type="checkbox" checked />
+          Show isolated nodes
+        </label>
+      </div>
+
+      <div class="control-group button-group">
+        <button id="reset-filters-btn" type="button">Reset Filters</button>
+      </div>
+
+      <p class="control-hint">Click a node in any diagram to highlight the same character across all diagrams.</p>
+    </section>
+
+    <section id="diagram-grid" class="diagram-grid">
+      <article class="diagram-card">
+        <div class="diagram-head">
+          <h2 id="left-title">Left Network</h2>
+          <div class="diagram-controls">
+            <div class="episode-range-controls">
+              <label for="left-from" class="mini-label">From</label>
+              <select id="left-from"></select>
+              <label for="left-to" class="mini-label">To</label>
+              <select id="left-to"></select>
+            </div>
+          </div>
+        </div>
+        <div id="left-graph" class="graph-container" aria-labelledby="left-title"></div>
+      </article>
+
+      <article class="diagram-card">
+        <div class="diagram-head">
+          <h2 id="right-title">Right Network</h2>
+          <div class="diagram-controls">
+            <div class="episode-range-controls">
+              <label for="right-from" class="mini-label">From</label>
+              <select id="right-from"></select>
+              <label for="right-to" class="mini-label">To</label>
+              <select id="right-to"></select>
+            </div>
+          </div>
+        </div>
+        <div id="right-graph" class="graph-container" aria-labelledby="right-title"></div>
+      </article>
+    </section>
+  </main>
+
+  <div id="tooltip" class="tooltip" role="status" aria-live="polite"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+  <script src="app.js"></script>
+</body>
+</html>
